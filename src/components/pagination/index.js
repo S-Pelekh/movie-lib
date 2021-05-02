@@ -13,7 +13,7 @@ export const Pagination = (page, totalPages) => {
           </Link>
         ) : null}
         {page !== "1" && page !== "2" ? (
-          <Link to={`/main/page1`}>
+          <Link to={`/main/1`}>
             <div> 1 </div>
           </Link>
         ) : null}

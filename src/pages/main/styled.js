@@ -58,3 +58,10 @@ export const Flex = styled.section`
   justify-content: space-between;
   flex-wrap: wrap;
 `;
+export const EmptyCard = styled.div`
+  width: calc(25% - 10px);
+  margin-bottom: 15px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;

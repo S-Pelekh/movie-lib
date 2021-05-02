@@ -34,7 +34,7 @@ export const MainPage = ({
           <h3>
             <Link to={`/details/${id}/${page}`}>{title}</Link>
           </h3>
-          <img src={Api.poster_url + poster_path} />
+          <img src={Api.poster_url + poster_path} alt="Poster" />
           <IconBlock
             onClick={() => dispatch(toggleFavorites(id))}
             active={favorites.includes(id)}

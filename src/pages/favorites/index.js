@@ -6,7 +6,7 @@ import moment from "moment";
 
 import Api from "../../helpers/api";
 import { toggleFavorites } from "../../store/actions";
-import { Flex, Card, IconBlock } from "../main/styled";
+import { Flex, Card, IconBlock, EmptyCard } from "../main/styled";
 import { ReactComponent as StarIcon } from "../../assets/star.svg";
 
 export const Favorites = () => {
@@ -28,7 +28,9 @@ export const Favorites = () => {
     return favoritesFull.map(
       ({ title, id, overview, release_date, poster_path }) => (
         <Card key={`movie-${id}`}>
-          <h3>{title}</h3>
+          <h3>
+            <Link to={`/details/${id}`}>{title}</Link>
+          </h3>
           <img src={Api.poster_url + poster_path} />
           <IconBlock
             onClick={() => dispatch(toggleFavorites(id))}
@@ -38,7 +40,6 @@ export const Favorites = () => {
           </IconBlock>
           <p>{moment(release_date).format("DD/MM/YYYY")}</p>
           <p>{overview}</p>
-          <Link to={`/details/${id}`}>Details</Link>
         </Card>
       )
     );
@@ -46,7 +47,10 @@ export const Favorites = () => {
 
   return (
     <section>
-      <Flex>{renderMovies()}</Flex>
+      <Flex>
+        {renderMovies()} <EmptyCard />
+        <EmptyCard />
+      </Flex>
     </section>
   );
 };

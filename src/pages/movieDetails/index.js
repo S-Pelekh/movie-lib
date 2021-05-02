@@ -6,6 +6,7 @@ import moment from "moment";
 import Api from "../../helpers/api";
 import { setMoviesDetails } from "../../store/actions";
 import { Loader } from "../../components/loader/index";
+import { MDstyle } from "./styled";
 
 export const MovieDetails = ({
   match: {
@@ -21,7 +22,7 @@ export const MovieDetails = ({
       Api.getDetails(id).then((data) => dispatch(setMoviesDetails(id, data)));
     }
   }, [id]);
-
+  console.log(moviesDetails[id]);
   const renderGenres = (genres) => {
     let str = `Genres: `;
     genres.forEach(({ name }, i) => {
@@ -41,21 +42,24 @@ export const MovieDetails = ({
       tagline,
     } = moviesDetails[id];
     return (
-      <section>
-        <Link to={`/main/${pageFrom || "1"}`}>Back</Link>
+      <MDstyle>
+        <Link to={`/main/${pageFrom || "1"}`}> Back</Link>
         <div>
-          <h2>{title}</h2>
-          <p>{tagline}</p>
-          <p>{moment(release_date).format("DD/MM/YYYY")}</p>
-
-          <img src={Api.poster_url + poster_path} />
-          <p>{overview}</p>
-          <a target="_blank" href={homepage}>
-            Home page
-          </a>
-          <p>{renderGenres(genres)}</p>
+          <img src={Api.poster_url + poster_path} alt="Poster" />
+          <div className="movie-content">
+            <h2>{title}</h2>
+            <p>
+              <i>{tagline}</i>
+            </p>
+            <p>{moment(release_date).format("DD/MM/YYYY")}</p>
+            <p>{overview}</p>
+            <p>{renderGenres(genres)}</p>{" "}
+            <a target="_blank" href={homepage}>
+              Home page
+            </a>
+          </div>
         </div>
-      </section>
+      </MDstyle>
     );
   } else {
     return <Loader />;
