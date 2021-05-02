@@ -5,6 +5,7 @@ import moment from "moment";
 
 import Api from "../../helpers/api";
 import { setMoviesDetails } from "../../store/actions";
+import { Loader } from "../../components/loader/index";
 
 export const MovieDetails = ({
   match: {
@@ -57,6 +58,6 @@ export const MovieDetails = ({
       </section>
     );
   } else {
-    return <div>Loader...</div>;
+    return <Loader />;
   }
 };

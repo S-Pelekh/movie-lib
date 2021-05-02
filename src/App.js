@@ -8,6 +8,7 @@ import { Wrapper } from "./components/common";
 import { Favorites } from "./pages/favorites";
 import { MainPage } from "./pages/main";
 import { MovieDetails } from "./pages/movieDetails";
+import { Loader } from "./components/loader";
 
 import { setReady, setTotalPages, setPage, setGenres } from "./store/actions";
 
@@ -57,7 +58,7 @@ function App() {
           </Switch>
         </Wrapper>
       ) : (
-        <div>Loader...</div>
+        <Loader />
       )}
     </Fragment>
   );

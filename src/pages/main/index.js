@@ -7,6 +7,8 @@ import Api from "../../helpers/api";
 import { setPage, toggleFavorites } from "../../store/actions";
 import { Flex, Card, IconBlock } from "./styled";
 import { ReactComponent as StarIcon } from "../../assets/star.svg";
+import { Loader } from "../../components/loader/index";
+import { Pagination } from "../../components/pagination/index";
 
 export const MainPage = ({
   match: {
@@ -27,9 +29,11 @@ export const MainPage = ({
 
   const renderMovies = () => {
     return movies[page].map(
-      ({ title, id, overview, genre_ids, release_date, poster_path }) => (
+      ({ title, id, overview, release_date, poster_path }) => (
         <Card key={`movie-${id}`}>
-          <h3>{title}</h3>
+          <h3>
+            <Link to={`/details/${id}/${page}`}>{title}</Link>
+          </h3>
           <img src={Api.poster_url + poster_path} />
           <IconBlock
             onClick={() => dispatch(toggleFavorites(id))}
@@ -40,7 +44,6 @@ export const MainPage = ({
 
           <p>{moment(release_date).format("DD/MM/YYYY")}</p>
           <p>{overview}</p>
-          <Link to={`/details/${id}/${page}`}>Details</Link>
         </Card>
       )
     );
@@ -48,18 +51,8 @@ export const MainPage = ({
 
   return (
     <section>
-      Main page
-      <Flex>{movies[page] ? renderMovies() : <div>Loader...</div>}</Flex>
-      <div>
-        {page !== "1" ? <Link to={`/main/${+page - 1}`}>Prev</Link> : null}
-        <span>
-          {page}/{totalPages}
-        </span>
-
-        {+page < totalPages ? (
-          <Link to={`/main/${+page + 1}`}>Next</Link>
-        ) : null}
-      </div>
+      {Pagination(page, totalPages)}
+      <Flex>{movies[page] ? renderMovies() : <Loader />}</Flex>
     </section>
   );
 };

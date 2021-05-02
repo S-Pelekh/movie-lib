@@ -26,7 +26,7 @@ export const Favorites = () => {
 
   const renderMovies = () => {
     return favoritesFull.map(
-      ({ title, id, overview, genre_ids, release_date, poster_path }) => (
+      ({ title, id, overview, release_date, poster_path }) => (
         <Card key={`movie-${id}`}>
           <h3>{title}</h3>
           <img src={Api.poster_url + poster_path} />
@@ -36,7 +36,6 @@ export const Favorites = () => {
           >
             <StarIcon />
           </IconBlock>
-
           <p>{moment(release_date).format("DD/MM/YYYY")}</p>
           <p>{overview}</p>
           <Link to={`/details/${id}`}>Details</Link>
@@ -47,7 +46,6 @@ export const Favorites = () => {
 
   return (
     <section>
-      Favorites pages
       <Flex>{renderMovies()}</Flex>
     </section>
   );
