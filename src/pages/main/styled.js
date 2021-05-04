@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 export const Card = styled.div`
-  width: calc(25% - 10px);
-  height: 550px;
   background: black;
   color: #fdd935;
   border-radius: 10px;
@@ -12,12 +10,51 @@ export const Card = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+  @media (min-width: 1000px) and (max-width: 2160px) {
+    width: calc(25% - 10px);
+    height: 550px;
+    > img {
+      height: 300px;
+    }
+    p {
+      max-height: 150px;
+    }
+  }
+  @media (min-width: 700px) and (max-width: 999px) {
+    width: calc(33.3% - 10px);
+    height: 500px;
+    > img {
+      height: 250px;
+    }
+    p {
+      max-height: 120px;
+    }
+  }
+  @media (min-width: 450px) and (max-width: 699px) {
+    width: calc(50% - 10px);
+    height: 450px;
+    > img {
+      height: 225px;
+    }
+    p {
+      max-height: 100px;
+    }
+  }
+  @media screen and (max-width: 550px) {
+    width: 100%;
+    height: 400px;
+    > img {
+      height: 200px;
+    }
+    p {
+      max-height: 100px;
+    }
+  }
   &:last-child {
     margin-bottom: 0;
   }
   > img {
     width: 100%;
-    height: 300px;
     object-fit: cover;
     border-radius: 10px;
     margin: 10px 0;
@@ -28,8 +65,7 @@ export const Card = styled.div`
     margin: 0;
   }
   p {
-    margin: 0;
-    max-height: 150px;
+    margin: 0 0 5px 0;
     overflow: hidden;
     text-align: center;
   }
